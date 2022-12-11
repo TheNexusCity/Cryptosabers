@@ -49,8 +49,6 @@ describe('Cryptosabers Contract Tests', async function () {
 
         await cryptosabers.balanceOf(owner.address);
 
-        await cryptosabers.connect(owner).setOpenMint(true);
-
         // price is in wei
         price = await cryptosabers.getMintPrice();
 
@@ -106,10 +104,9 @@ describe('Cryptosabers Contract Tests', async function () {
     });
 
     it('Owner should set the contract to be mintable for everybody ', async function () {
-        await cryptosabers.connect(owner).setOpenMint(true);
-        let nonWhitelistPrice = await cryptosabers.getMintPrice();
+        let price = await cryptosabers.getMintPrice();
         await cryptosabers.connect(addr1)["mint(uint256)"](1, {
-            value: nonWhitelistPrice,
+            value: price,
         });
 
         const tknBal = await cryptosabers.balanceOf(addr1.address);
