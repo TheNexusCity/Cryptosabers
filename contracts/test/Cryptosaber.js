@@ -4,6 +4,7 @@ describe('Cryptosabers Contract Tests', async function () {
     let owner, addr1, addr2;
     let Cryptosabers, cryptosabers;
     let price;
+    
     it('Deployment', async function () {
         [owner, addr1, addr2] = await ethers.getSigners();
         Cryptosabers = await ethers.getContractFactory('Cryptosabers');
@@ -22,6 +23,7 @@ describe('Cryptosabers Contract Tests', async function () {
     it('should deploy the contract', async function () {
         expect(cryptosabers.address).to.exist;
     });
+
     it('supports ERC165', async function () {
         expect(await cryptosabers.supportsInterface('0x01ffc9a7')).to.eq(true);
     });
