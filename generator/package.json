@@ -1,0 +1,11 @@
+{
+  "name": "cryptosabers-generator",
+  "version": "1.0.0",
+  "main": "generate.js",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "generate-cryptosabers": "node ./generate.js"
+  }
+}

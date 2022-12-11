@@ -1,0 +1,10 @@
+data.json
+out/*
+combined/*
+blend/textures/*
+/__pycache__
+*.png
+*.blend1
+*.vrm
+*.glb
+*.jpg
