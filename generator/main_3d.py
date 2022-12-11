@@ -260,18 +260,18 @@ def main():
         for attr in x["attributes"]:
             print(attr["value"])
             # finds the traits of current json object and moves the to output collection
-            if attr["trait_type"] == "outfit":
-                show_all_inside_obj(obj_map.oufit[attr["value"]])
-            if attr["trait_type"] == "head":
-                show_all_inside_obj(obj_map.head[attr["value"]])
-            if attr["trait_type"] == "hat":
-                show_all_inside_obj(obj_map.hat[attr["value"]])
-            if attr["trait_type"] == "boots":
-                show_all_inside_obj(obj_map.boots[attr["value"]])
-            if attr["trait_type"] == "vambrace":
-                show_all_inside_obj(obj_map.vambrace[attr["value"]])
-            if attr["trait_type"] == "epaulettes":
-                show_all_inside_obj(obj_map.epaulettes[attr["value"]])
+            if attr["trait_type"] == "bladeColor":
+                show_all_inside_obj(obj_map.bladeColor[attr["value"]])
+            if attr["trait_type"] == "bladeColor":
+                show_all_inside_obj(obj_map.bladeColor[attr["value"]])
+            if attr["trait_type"] == "switchType":
+                show_all_inside_obj(obj_map.switchType[attr["value"]])
+            if attr["trait_type"] == "handleType":
+                show_all_inside_obj(obj_map.handleType[attr["value"]])
+            if attr["trait_type"] == "colorScheme":
+                show_all_inside_obj(obj_map.colorScheme[attr["value"]])
+            if attr["trait_type"] == "emitterType":
+                show_all_inside_obj(obj_map.emitterType[attr["value"]])
             if attr["trait_type"] == "back":
                 show_all_inside_obj(obj_map.back[attr["value"]])
             if attr["trait_type"] == "torso":
@@ -330,13 +330,6 @@ def main():
         # call combine.sh with the arg of the current counter
         print("Calling combine script on model...")
         subprocess.call(["bash", "./combine.sh", str(counter)])
-
-        print("Converting to VRM...")
-        # call bash glb_to_vrm.sh with the arg of the current counter
-        subprocess.call(["bash", "./glb_to_vrm.sh", str(counter)])
-
-        # scale_obj(bpy.data.objects["Character"], .001)
-        # bpy.ops.export_scene.vrm(filepath="./out/{}.vrm".format(str(counter)), export_invisibles=False, export_only_selections=False, enable_advanced_preferences=False, export_fb_ngon_encoding=False)
         clear_output()
         counter += 1
 

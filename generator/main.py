@@ -230,40 +230,16 @@ def main():
         for attr in x["attributes"]:
             print(attr["value"])
             # finds the traits of current json object and moves the to output collection
-            if attr["trait_type"] == "outfit":
-                show_all_inside_obj(obj_map.oufit[attr["value"]])
-            if attr["trait_type"] == "head":
-                show_all_inside_obj(obj_map.head[attr["value"]])
-            if attr["trait_type"] == "hat":
-                show_all_inside_obj(obj_map.hat[attr["value"]])
-            if attr["trait_type"] == "boots":
-                show_all_inside_obj(obj_map.boots[attr["value"]])
-            if attr["trait_type"] == "vambrace":
-                show_all_inside_obj(obj_map.vambrace[attr["value"]])
-            if attr["trait_type"] == "epaulettes":
-                show_all_inside_obj(obj_map.epaulettes[attr["value"]])
-            if attr["trait_type"] == "back":
-                show_all_inside_obj(obj_map.back[attr["value"]])
-            if attr["trait_type"] == "torso":
-                show_all_inside_obj(obj_map.torso[attr["value"]])
-            if attr["trait_type"] == "arms":
-                show_all_inside_obj(obj_map.arms[attr["value"]])
-            if attr["trait_type"] == "garment":
-                show_all_inside_obj(obj_map.garment[attr["value"]])
-            if attr["trait_type"] == "guns":
-                show_all_inside_obj(obj_map.guns[attr["value"]])
-            # if attr["trait_type"] == "backgrounds":
-            #     move_obj_to_collection(obj_map.background_map[attr["value"]])
-            if attr["trait_type"] == "backgrounds":
-                bpy.context.scene.frame_set(
-                    obj_map.background[attr["value"]])  # set frame with pose
-
-        #sets objects as children of armature
-        # for i in bpy.data.collections[result_coll].objects:
-        #     if len(i.modifiers) > 0:
-        #         i.modifiers["Armature"].object = armature
-        #         i.modifiers["Armature"].use_bone_envelopes = True
-        #     i.parent = armature
+            if attr["trait_type"] == "bladeColor":
+                show_all_inside_obj(obj_map.bladeColor[attr["value"]])
+            if attr["trait_type"] == "bladeColor":
+                show_all_inside_obj(obj_map.bladeColor[attr["value"]])
+            if attr["trait_type"] == "switchType":
+                show_all_inside_obj(obj_map.switchType[attr["value"]])
+            if attr["trait_type"] == "handleType":
+                show_all_inside_obj(obj_map.handleType[attr["value"]])
+            if attr["trait_type"] == "colorScheme":
+                show_all_inside_obj(obj_map.colorScheme[attr["value"]])
 
         # for debugging
         for i in bpy.data.collections["output"].objects:
