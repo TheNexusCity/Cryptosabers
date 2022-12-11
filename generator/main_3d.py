@@ -97,8 +97,6 @@ def deactivate_this_collection(coll_name):
 
 def activate_collections():
     for x in bpy.data.collections:
-        # print("$$$$$ collection for activation:", x.name)
-        # if x.name != 'Frame_Environment':
         print("$$$$$ activating collection ", x.name)
         activate_obj(x)
         for y in x.objects:
@@ -174,34 +172,6 @@ def main():
     # open blend file
     bpy.ops.wm.open_mainfile(filepath=os.path.abspath("./blend/scene.blend"))
 
-    # tell blender to unpack all resources -- all of the textures we want to use are already in the textures folder
-    # method='USE_LOCAL' means that the files will be linked to the same folder as the blend file
-    # method='WRITE_LOCAL' means that the files will be copied to the same folder as the blend file
-    # bpy.ops.file.unpack_all(method='USE_LOCAL')
-
-    # run the convert.sh bash script to convert all .png files to .jpg and resize them appropriately
-    # subprocess.call(['bash', './convert.sh'])
-
-    # change all image import paths that include .png to be .jpg instead
-    # for image in bpy.data.images:
-    #     if image.filepath.endswith('.png'):
-    #         image.filepath = image.filepath.replace('.png', '.jpg')
-
-    # split all meshes by material
-    # bpy.ops.object.select_all(action='SELECT')
-    # bpy.ops.object.mode_set(mode='EDIT')
-    # bpy.ops.mesh.select_all(action='SELECT')
-    # bpy.ops.mesh.separate(type='MATERIAL')
-
-    # # go back to object mode
-    # bpy.ops.object.mode_set(mode='OBJECT')
-
-    # # select all objects
-    # bpy.ops.object.select_all(action='SELECT')
-
-    # # limit total vertex groups
-    # bpy.ops.object.vertex_group_limit_total(limit=4, group_select_mode='ALL')
-
     # iterate through all objects and remove all shape keys
     for obj in bpy.data.objects:
         if obj.type == 'MESH':
@@ -210,22 +180,6 @@ def main():
                 for k in obj.data.shape_keys.key_blocks:
                     obj.shape_key_remove(k)
 
-    # for each vertex group in the obj mesh, interate through all vertices and check the vertex weights
-    # if all vertices in the mesh have less than .1 weight, remove the vertex group
-    # blender 3.0 or higher
-    # for obj in bpy.data.objects:
-    #     if obj.type == 'MESH':
-    #         vgroup_used = {i: False for i, k in enumerate(obj.vertex_groups)}
-            
-    #         for v in obj.data.vertices:
-    #             for g in v.groups:
-    #                 if g.weight > 0.0:
-    #                     vgroup_used[g.group] = True
-            
-    #         for i, used in sorted(vgroup_used.items(), reverse=True):
-    #             if not used:
-    #                 obj.vertex_groups.remove(obj.vertex_groups[i])
-    # do we need to update the object?
     bpy.context.view_layer.update()
 
     # iterate through all bones and replace 'mixamorig:' with ''
@@ -245,11 +199,6 @@ def main():
     # create render collection within blender file
     collection = bpy.context.blend_data.collections.new(name=result_coll)
     bpy.context.scene.collection.children.link(collection)
-
-    # sets armature to pose mode
-    # armature = bpy.data.objects["Armature"]
-    # armature.data.pose_position = 'POSE'
-    # scale_obj(armature)
 
     # loop through json file
     for i in range(start_frame, end_frame):
@@ -272,21 +221,9 @@ def main():
                 show_all_inside_obj(obj_map.colorScheme[attr["value"]])
             if attr["trait_type"] == "emitterType":
                 show_all_inside_obj(obj_map.emitterType[attr["value"]])
-            if attr["trait_type"] == "back":
-                show_all_inside_obj(obj_map.back[attr["value"]])
-            if attr["trait_type"] == "torso":
-                show_all_inside_obj(obj_map.torso[attr["value"]])
-            if attr["trait_type"] == "arms":
-                show_all_inside_obj(obj_map.arms[attr["value"]])
-            if attr["trait_type"] == "garment":
-                show_all_inside_obj(obj_map.garment[attr["value"]])
-            if attr["trait_type"] == "guns":
-                show_all_inside_obj(obj_map.guns[attr["value"]])
             # if attr["trait_type"] == "backgrounds":
-            #     move_obj_to_collection(obj_map.background_map[attr["value"]])
-            if attr["trait_type"] == "backgrounds":
-                bpy.context.scene.frame_set(
-                    obj_map.background[attr["value"]])  # set frame with pose
+            #     bpy.context.scene.frame_set(
+            #         obj_map.background[attr["value"]])  # set frame with pose
 
         for obj in objectIterator(bpy.data.collections["Cryptosaber"]):
             try:
@@ -299,16 +236,7 @@ def main():
         armature.select_set(True)
         armature.hide_set(False)
 
-
-        # if any object has more than one armature, delete all after the first one
-        # for obj in bpy.context.selected_objects:
-        #     if obj.type == 'ARMATURE':
-        #         if obj != armature:
-        #             bpy.data.objects.remove(obj)
-
-        # render(output_dir="./out", output_filename=str(counter))
         bpy.context.scene.frame_set(13)
-        # delete "./out/{}.glb" if it exists
         if os.path.exists("./out/{}.glb".format(counter)):
             os.remove("./out/{}.glb".format(counter))
         if os.path.exists("./combined/{}.glb".format(counter)):
