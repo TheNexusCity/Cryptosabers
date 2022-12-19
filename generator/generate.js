@@ -275,11 +275,11 @@ console.log("cryptosaber", series)
 
 const seriesFiltered = [];
 series.forEach((cryptosaber) => {
-  const newCowboy = { ...cryptosaber };
-  delete newCowboy["duplicate"];
-  delete newCowboy["hash"];
-  delete newCowboy["rarity"];
-  seriesFiltered.push(newCowboy);
+  const newSaber = { ...cryptosaber };
+  delete newSaber["duplicate"];
+  delete newSaber["hash"];
+  delete newSaber["rarity"];
+  seriesFiltered.push(newSaber);
 });
 
 console.log(
